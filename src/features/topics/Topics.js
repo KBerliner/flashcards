@@ -7,13 +7,17 @@ import { selectTopics } from "./topicsSlice";
 
 export default function Topics() {
   const topics = useSelector(selectTopics);
-  console.log(topics); // replace this with a call to your selector to select all the topics in state
+  Object.values(topics).map(topic => {
+    console.log('TOPICS: ', topic);
+  })
 
   return (
     <section className="center">
       <h1>Topics</h1>
       <ul className="topics-list">
-        {Object.values(topics).map((topic) => (
+        {Object.values(topics).map((topic) => 
+        topic.quizIds ? 
+        (
           <li className="topic" key={topic.id}>
           <Link to={ROUTES.topicRoute(topic.id)} className="topic-link">
            <div className="topic-container">
@@ -25,14 +29,16 @@ export default function Topics() {
            </div>
          </Link>
           </li>
-        ))}
+        ) : <></>)}
       </ul>
+
       <Link
         to={ROUTES.newTopicRoute()}
         className="button create-new-topic-button"
       >
         Create New Topic
       </Link>
+      
     </section>
   );
 }
