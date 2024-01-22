@@ -10,8 +10,10 @@ export const topicsSlice = createSlice({
     reducers: {
         addTopic: (state, action) => {
             action.payload.quizIds = [];
-            state[action.payload.id] = (action.payload);
-            console.log(state[action.payload.id]);
+            state[action.payload.id] = action.payload;
+        },
+        addQuiz: (state, action) => {
+            state[action.payload.id].quizIds.push(action.payload.id);
         }
     }
 });
